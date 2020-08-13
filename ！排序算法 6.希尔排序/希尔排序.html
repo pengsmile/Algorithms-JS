@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let arr = [456, 234, 654, 32, 56, 1, 35, 78, 4, 7, 6, 789];
+
+        Array.prototype.shellSort = function() { 
+            for (var step = this.length >> 1; step > 0; step >>= 1)  
+            {  
+                //alert(step >>= 1);
+                for (var i = 0; i < step; ++i)  
+                {  
+                    for (var j = i + step; j < this.length; j += step)  
+                    {  
+                        var k = j, value = this[j];  
+                        while (k >= step && this[k - step] > value)  
+                        {  
+                            this[k] = this[k - step];  
+                            k -= step;  
+                        }  
+                        this[k] = value;  
+                    }  
+                }  
+            }
+            return this
+        } 
+        var array = [];  
+        for (var i = 0; i < 10000; ++i) {
+            array.push(Math.round(Math.random() * 10000));  
+        }
+
+        function shellSort(arr) {
+            let gap = 1,
+                len = arr.length,
+                target, j
+            //动态定义间隔序列
+            while (gap < len / 5) {
+                gap = gap * 5 + 1
+            }
+
+            for (gap; gap > 0; gap = Math.floor(gap / 5)) {
+                for (let i = gap; i < len; i++) {
+                    target = arr[i]
+                    for (j = i - gap; j >= 0; j -= gap) {
+                        if (arr[j] > target) {
+                            arr[j + gap] = arr[j]
+                        } else {
+                            break
+                        }
+                    }
+                    arr[j + gap] = target
+                }
+            }
+
+            return arr
+        }
+        console.time('shellSort')
+        shellSort(array)
+        console.timeEnd('shellSort')
+
+        // 希尔排序
+        function shallSort2(array) {
+            var increment = array.length;
+            var i
+            var temp; //暂存
+            var count = 0;
+            do {
+                //设置增量
+                increment = Math.floor(increment / 3) + 1;
+                for (i = increment; i < array.length; i++) {
+                    if (array[i] < array[i - increment]) {
+                        temp = array[i];
+                        for (var j = i - increment; j >= 0 && temp < array[j]; j -= increment) {
+                            array[j + increment] = array[j];
+                        }
+                        array[j + increment] = temp;
+                    }
+                }
+            }
+            while (increment > 1)
+            return array;
+        }
+        console.time('shellSort2')
+        shallSort2(array)
+        console.timeEnd('shellSort2')
+
+        console.time()
+        console.log(array.shellSort());
+        console.timeEnd()
+    </script>
+</body>
+
+</html>

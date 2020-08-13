@@ -19,12 +19,12 @@
                 value, // 当前比较的值
                 i, // 未排序部分的当前位置
                 j; // 已排序部分的当前位置
-            
+
             //默认第一个元素是已排好序的部分，所以i从1开始是未排序的部分
             for (i = 1; i < len; ++i) {
                 // 储存当前位置的值,未排序部分的第一个值
                 value = myArray[i];
-                
+
                 /*
                  * 已排序部分从后往前一个个的和value比较
                  * 如果大于value，就往后移动一位
@@ -44,6 +44,27 @@
         //测试一下
         var dataStore = [1, 8, 3, 2, 9, 5, 4, 7];
         console.log(insertionSort(dataStore));
+
+        /**
+         * 插入排序
+         */
+        function insertSort(arr) {
+            let temp;
+            arr.forEach((v, i) => {
+                let j = i;
+                while (arr[j - 1] > arr[j] && j >= 0) {
+                    temp = arr[j - 1];
+                    [arr[j - 1], arr[j]] = [arr[j], temp];
+                    j--;
+                }
+            });
+            return arr
+        }
+        console.time('insertSort')
+        console.log(insertSort([456, 234, 654, 32, 56, 1, 35, 78, 4, 7, 6, 789]));
+        console.timeEnd('insertSort')
+
+        
     </script>
 </body>
 

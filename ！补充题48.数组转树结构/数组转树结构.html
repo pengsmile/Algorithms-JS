@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var empList = [{
+                id: 1,
+                parentId: null,
+                empName: 'keller1',
+                dept: '董事会',
+                post: '总裁'
+            },
+            {
+                id: 2,
+                parentId: null,
+                empName: 'keller2',
+                dept: '董事会',
+                post: '总裁夫人'
+            },
+            {
+                id: 23,
+                parentId: 2,
+                empName: 'keller11',
+                dept: '人事部',
+                post: '总裁夫人助理'
+            },
+            {
+                id: 11,
+                parentId: 1,
+                empName: 'keller11',
+                dept: '人事部',
+                post: '人事部主管'
+            },
+            {
+                id: 12,
+                parentId: 1,
+                empName: 'keller12',
+                dept: '开发部',
+                post: '开发部主管'
+            },
+            {
+                id: 13,
+                parentId: 1,
+                empName: 'keller13',
+                dept: '市场部',
+                post: '市场部主管'
+            },
+            {
+                id: 121,
+                parentId: 12,
+                empName: 'keller121',
+                dept: '开发部',
+                post: '开发部经理1'
+            },
+            {
+                id: 122,
+                parentId: 12,
+                empName: 'keller122',
+                dept: '开发部',
+                post: '开发部经理2'
+            },
+            {
+                id: 123,
+                parentId: 12,
+                empName: 'keller123',
+                dept: '开发部',
+                post: '开发部经理3'
+            },
+            {
+                id: 1211,
+                parentId: 121,
+                empName: 'keller1211',
+                dept: '开发部',
+                post: '程序员1'
+            },
+            {
+                id: 1212,
+                parentId: 121,
+                empName: 'keller1212',
+                dept: '开发部',
+                post: '程序员2'
+            },
+        ];
+
+        function getTree(list) {
+            var topNodes = new Array();
+            topNodes = list.filter(item => !item.parentId);
+            topNodes.forEach(item => {
+                setChildren(item, list);
+            })
+            return topNodes;
+        }
+
+        function setChildren(parent, list) {
+            var children = new Array();
+            parent.children = children;
+
+            list.forEach(item => {
+                if (item.parentId == parent.id) {
+                    children.push(setChildren(item, list))
+                }
+            })
+            return parent;
+        }
+
+        console.log(getTree(empList));
+    </script>
+</body>
+
+</html>
