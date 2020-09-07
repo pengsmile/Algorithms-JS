@@ -76,11 +76,54 @@
             return array;
         }
 
+        var array = [];  
+        for (var i = 0; i < 10000; ++i) {
+            array.push(Math.round(Math.random() * 10000));  
+        }
         //test
         var dataStore1 = [1, 8, 3, 2, 9, 5, 4, 7];
         var dataStore2 = [1, 8, 3, 2, 9, 5, 4, 7];
-        console.log(bubbleSort(dataStore1));
-        console.log(bubbleSortOptTriple(dataStore2));
+        // console.time('1');
+        // bubbleSort(array)
+        // console.timeEnd('1');
+        // bubbleSortOptTriple(array)
+
+        const l = console.log;
+        const bubbSort = arr => {
+            for(let i = 0; i < arr.length; i++) {
+                for(let j = 0; j < arr.length - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        swap(arr, j, j + 1)
+                    }
+                }
+            }
+            return arr
+        }
+        l(bubbSort(array))
+
+        const bubb = arr => {
+            for (let index = 0; index < arr.length; index++) {
+                for (let j = 0; j < array.length - index; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        // let temp = arr[j + 1];
+                        // arr[j + 1] = arr[j];
+                        // arr[j] = temp
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+                    }
+                }
+            }
+            return arr
+        }
+        const bubb3 = array => {
+            for (let index = 0; index < array.length; index++) {
+                for (let j = 0; j < array.length - index; j++) {
+                    if (array[j]  > array[j + 1]) {
+                        [array[j], array[j + 1]] = [array[j + 1], array[j]]
+                    }
+                }
+            }
+            return array
+        }
     </script>
 </body>
 

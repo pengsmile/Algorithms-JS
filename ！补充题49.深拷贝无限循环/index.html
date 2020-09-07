@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function deepCopy2(obj, parent = null) {
+            //创建一个新对象
+            let result = {};
+            let keys = Object.keys(obj),
+                key = null,
+                temp = null,
+                _parent = parent;
+            //该字段有父级则需要追溯该字段的父级
+            while (_parent) {
+                //如果该字段引用了它的父级，则为循环引用
+                if (_parent.originParent === obj) {
+                    //循环引用返回同级的新对象
+                    return _parent.currentParent;
+                }
+                _parent = _parent.parent
+            }
+            for (let i = 0, len = keys.length; i < len; i++) {
+                key = keys[i]
+                temp = obj[key]
+                // 如果字段的值也是一个新对象
+                if (temp && typeof temp === 'object') {
+                    result[key] = deepCopy2(temp, {
+                        //递归执行深拷贝，将同级的待拷贝对象与新对象传递给parent，方便追溯循环引用
+                        originParent: obj,
+                        currentParent: result,
+                        parent: parent
+                    });
+                } else {
+                    result[key] = temp;
+                }
+            }
+            return result;
+        }
+
+        const obj1 = {
+            x: 1
+        }
+        obj1.z = obj1;
+
+        const obj2 = deepCopy2(obj1);
+        console.log(obj2)
+    </script>
+</body>
+
+</html>

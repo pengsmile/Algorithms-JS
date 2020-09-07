@@ -91,9 +91,12 @@
         shallSort2(array)
         console.timeEnd('shellSort2')
 
+        let t1 = new Date().valueOf()
         console.time()
         console.log(array.shellSort());
         console.timeEnd()
+        let t2 = new Date().valueOf()
+        console.log('希尔排序' + (t2 - t1));
     </script>
 </body>
 

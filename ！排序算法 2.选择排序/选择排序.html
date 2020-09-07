@@ -42,8 +42,43 @@
         }
 
         //测试一下
-        var dataStore = [1, 8, 3, 2, 9, 5, 4, 7];
-        console.log(selectionSort(dataStore));
+        var dataStore = [5,4,3,2,1];
+        
+
+        const SelectSort = arr => {
+            let min;
+            for (let index = 0; index < arr.length; index++) {
+                min = index;
+                // 找到最小的值
+                for (let j = index; j < arr.length; j++) {
+                    if (arr[j] < arr[min]) {
+                        min = j
+                    }
+                }
+                if (index != min) {
+                    [arr[index], arr[min]] = [arr[min], arr[index]]
+                }
+            }
+            return arr
+        }
+        console.log(SelectSort(dataStore));
+
+        const SelectSort3 = arr => {
+            let min = 0;
+            for (let index = 0; index < arr.length; index++) {
+                min = index
+                
+                for (let j = 0; j < array.length; j++) {
+                    if (arr[j] > arr[min]) {
+                        min = j
+                    }
+                }
+                if (index != min) {
+                    [arr[index], arr[min]] = [arr[min], arr[index]]
+                }
+            }
+            return arr
+        }
     </script>
 </body>
 

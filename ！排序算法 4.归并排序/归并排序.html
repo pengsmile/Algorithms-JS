@@ -18,44 +18,82 @@
             if (myArray.length < 2) {
                 return myArray;
             }
-
             var middle = Math.floor(myArray.length / 2),
                 left = myArray.slice(0, middle),
                 right = myArray.slice(middle);
-
-            // 递归
-            // 不断拆分只到一个数组只有一个数
-            // var result1 = merge(mergeSort(left), mergeSort(right));
             return merge(mergeSort(left), mergeSort(right));
         }
-
         // 被拆分的数组重新合并
         function merge(left, right) {
             var result = [],
                 left_index = 0,
                 right_index = 0;
-
-            // 将两个数组合并
-            // 合并的时候按从小到大的顺序
-            //本例子18进18出，32进23出，1823进1238出
             while (left_index < left.length && right_index < right.length) {
                 if (left[left_index] < right[right_index]) {
-                    //先push 再自加哦
                     result.push(left[left_index++]);
                 } else {
                     result.push(right[right_index++]);
                 }
             }
-
-            // 和其他数组拼接，上一个while中差最大的一个没有排序，这里给加到最后
-            // var result1 = result.concat(left.slice(left_index)).concat(right.slice(right_index));
             return result.concat(left.slice(left_index)).concat(right.slice(right_index));
         }
+
+        console.log(merge([5,6,7,8], [1,2,3,4]))
 
 
         //测试一下
         var dataStore = [1, 8, 3, 2, 9, 5, 4, 7];
         console.log(mergeSort(dataStore));
+
+
+        // const mergeSort2 = array => {
+        //     if (array.length > 1) {
+        //         const middle = Math.floor(length / 2);
+        //         const left = merge(array.slice(0, middle));
+        //         const right = merge(array.slice(middle, array.length));
+        //         array = merge(left, right);
+        //     }
+        //     return array
+        // }
+
+        const Merge = (left, right) => {
+            let left_index = 0, right_index = 0; result = [];
+            while(left_index < left.length && right_index < right.length) {
+                if (left[left_index] < right[right_index]) {
+                    result.push(left[left_index++])
+                } else {
+                    result.push(right[right_index++])
+                }
+            }
+            return result.concat(array.slice(left_index)).concat(array.slice(right_index));
+        }
+        const MergeSort2 = array => {
+            if (array.length < 2) return array
+            const middle = Math.floor(array.length / 2);
+            const left = MergeSort2(array.slice(0, middle));
+            const right = MergeSort2(array.slice(middle, array.length));
+            return Merge(left, right)
+        }
+
+        const MergeSort5 = array => {
+            if (array.length < 2) return array
+            const middle = Math.floor(array.length / 2);
+            const left = MergeSort5(array.slice(0, middle));
+            const right = MergeSort5(array.slice(middle, array.length));
+            return Merge5(left, right);
+
+        }
+        const Merge5 = (left, right) => {
+            let left_index = 0; right_index = 0; result = [];
+            while(left_index < left.length && right.length < right_index) {
+                if (left[left_index] < right[right_index]) {
+                    result.push(left[left_index++])
+                } else {
+                    result.push(right[right_index++])
+                }
+            }
+            return result.concat(left.slice(left_index)).concat(right.slice(right_index));
+        }
     </script>
 </body>
 

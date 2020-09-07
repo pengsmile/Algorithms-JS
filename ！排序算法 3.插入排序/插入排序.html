@@ -60,11 +60,54 @@
             });
             return arr
         }
+
+        var array = [];  
+        for (var i = 0; i < 10000; ++i) {
+            array.push(Math.round(Math.random() * 10000));  
+        }
+        console.log(array)
         console.time('insertSort')
-        console.log(insertSort([456, 234, 654, 32, 56, 1, 35, 78, 4, 7, 6, 789]));
+        console.log(insertSort(array));
         console.timeEnd('insertSort')
 
+
+        function InsertSort2 (arr) {
+            let temp;
+            arr.forEach((v, i) => {
+                let j = i;
+                while (arr[j - 1] > arr[j] && j >= 0) {
+                    temp = arr[j - 1];
+                    [arr[j - 1], arr[j]] = [arr[j], temp];
+                    j--
+                }
+            })
+            return arr
+        }
         
+        const InsertSort3 = array => {
+            for (let index = 0; index < array.length; index++) {
+                let j = index;
+                while (array[j - 1] > array[j] && j > 0) {
+                    [array[j - 1], array[j]] = [array[j], array[j - 1]]
+                    j--
+                }
+            }
+            return array
+        }
+        console.log(InsertSort3([3,5,1,4,2]))
+
+        const InsertSort4 = arr => {
+            for (let index = 0; index < arr.length; index++) {
+                let j = index;
+                while(arr[j - 1] > arr[j] && j > 0) {
+                    [arr[j - 1], arr[j]] = [arr[j], arr[j - 1]]
+                    j--;
+                }
+                
+            }
+            return arr
+        }
+        console.log(InsertSort4([3,5,1,4,2]))
     </script>
 </body>
 
